@@ -2,19 +2,6 @@ import matplotlib.pyplot as plt
 from numpy import pi, vectorize, arange, cos, sin, ndarray
 from scipy.integrate import quad
 from typing import Callable
-import matplotlib
-
-
-'''
-matplotlib.use("pgf")
-matplotlib.rcParams.update({
-    "pgf.texsystem": "xelatex",
-    'font.family': 'serif',
-    'text.usetex': True,
-    'pgf.rcfonts': False,
-})
-
-'''
 
 
 def fourier_series(x_values: ndarray, func: Callable, p: float = pi, limit: int = 30) -> list[float]:
@@ -36,7 +23,8 @@ def fourier_series(x_values: ndarray, func: Callable, p: float = pi, limit: int 
     a0 = a0()
     a = [an(n) for n in range(limit)]
     b = [bn(n) for n in range(limit)]
-    fs = [a0 / 2 + sum(a[n] * cos(n * pi * x / p) + b[n] * sin(n * pi * x / p) for n in range(1, limit)) for x in x_values]
+    fs = [a0 / 2 + sum(a[n] * cos(n * pi * x / p) + b[n] * sin(n * pi * x / p) for n in range(1, limit)) for x in
+          x_values]
 
     return fs
 
@@ -65,7 +53,7 @@ if __name__ == "__main__":
     plt.plot(x - 2 * pi, f(x), 'C0')
     plt.plot(x + 2 * pi, f(x), 'C0')
     plt.plot(x, f(x), 'C0', label=r'$f(x)$')
-    plt.xticks([-3*pi, -2*pi, -pi, 0, pi, 2 * pi, 3 * pi],
+    plt.xticks([-3 * pi, -2 * pi, -pi, 0, pi, 2 * pi, 3 * pi],
                [r"$-3\pi$", r"$-2\pi$", r"$-\pi$", r"$0$", r"$\pi$", r"$2\pi$", r"$3\pi$"])
     plt.yticks([-pi, -pi / 2, 0, pi / 2, pi], [r"$-\pi$", r"$-\frac{\pi}{2}$", r"$0$", r"$\frac{\pi}{2}$", r"$\pi$"])
     plt.legend(loc='upper left')
